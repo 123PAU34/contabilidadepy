@@ -1,0 +1,57 @@
+Aqui está a página principal com os botões e formulário.
+<!DOCTYPE html>
+ <html lang="pt">
+ <head> 
+   <meta charset="UTF-8">
+   <meta name="viewport"
+ content="width=device-width, initial-
+scale=1.0"> 
+  <title>Livro de Contas</title> 
+  <link rel="stylesheet" href="{{
+ url_for('static', filename='style.css') }}">
+ </head>
+ <body> 
+
+<h1>📖 Livro de Contas</h1> 
+
+<form action="/add" method="POST"> 
+<input type="date" name="date" required> 
+<input type="text" name="doc1" placeholder="Doc. Nº 1" required>
+ <input type="text" name="doc2" placeholder="Doc. Nº 2"> 
+<input type="text" name="descricao" placeholder="Descrição" required> 
+<button type="submit">Adicionar</
+button>
+ </form>
+ <table>
+ <tr>
+ <th>Data</th>
+ <th>Doc. Nº 1</th>
+ <th>Doc. Nº 2</th>
+ <th>Descrição</th>
+ <th>Ação</th>
+ </tr>
+ {% for r in registros %} 
+<tr> 
+<td>{{ r.data }}</td>
+ <td>{{ r.doc1 }}</td>
+ <td>{{ r.doc2 }}</td>
+ <td>{{ r.descricao }}</td>
+ <td>
+ <button 
+onclick="deleteRecord({{ r.id }})">🗑️
+ Excluir</button> 
+</td> 
+</tr> 
+{% endfor %} 
+</table> 
+<script> 
+function deleteRecord(id) { 
+fetch('/delete/' + id, { method: 'POST' })
+ .then(response => 
+response.json()) 
+.then(data => 
+location.reload()); 
+} 
+</script> 
+</body> 
+</html>
