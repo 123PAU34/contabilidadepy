@@ -5,4 +5,15 @@ run = "language"
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "language"]
+run = ["sh", "-c", "python 'backend em python app.py'"]
+
+[workflows]
+runButton = "app"
+
+[[workflows.workflow]]
+name = "app"
+author = 40202986
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python 'backend em python app.py'"
